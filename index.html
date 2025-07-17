@@ -12,10 +12,40 @@
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
+        /* New styles for robust parallax effect */
+        .parallax-container {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 2px; /* This creates the 3D space */
+        }
         .hero-bg {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            transform-style: preserve-3d; /* Allows child elements to be positioned in 3D space */
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://lh3.googleusercontent.com/p/AF1QipMklmVXn5ghcj0xeQzPbuz8Sdoat9vNnf4SbZu3=s773-k-no');
             background-size: cover;
             background-position: center;
+            /* This makes the background move slower */
+            transform: translateZ(-1px) scale(1.5);
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight;
+        }
+        .section-subtitle {
+            @apply text-lg md:text-xl text-gray-500 mb-10 max-w-3xl mx-auto;
         }
     </style>
 </head>
@@ -52,120 +82,125 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-bg text-white">
-        <div class="container mx-auto px-6 py-32 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Barrington Landscaping & Contractor Services</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Top-rated, professional services to bring your outdoor vision to life with passion and precision.</p>
-            <a href="#contact" class="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition">Schedule a Consultation</a>
-             <p class="mt-4">Or Call Us: <a href="tel:+14014993401" class="font-bold hover:underline">+1 (401) 499-3401</a></p>
-        </div>
-    </section>
+    <div class="parallax-container">
+        <!-- Hero Section -->
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 text-center text-white">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Barrington Landscaping & Contractor Services</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Top-rated, professional services to bring your outdoor vision to life with passion and precision.</p>
+                <a href="#contact" class="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition">Schedule a Consultation</a>
+                 <p class="mt-4">Or Call Us: <a href="tel:+14014993401" class="font-bold hover:underline">+1 (401) 499-3401</a></p>
+            </div>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Our Services</h2>
-                <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
-                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Comprehensive solutions for all your landscaping and contracting needs.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-seedling text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Landscape Design & Installation</h3>
-                    <p class="text-gray-600">Creating beautiful, sustainable gardens and outdoor spaces tailored to your style. We handle everything from design to planting.</p>
+        <!-- The rest of your content goes here, outside the parallax hero but inside the main scroll container -->
+        <div class="relative bg-gray-50 z-10">
+            <!-- Services Section -->
+            <section id="services" class="py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Our Services</h2>
+                        <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
+                        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Comprehensive solutions for all your landscaping and contracting needs.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Service Card 1 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <i class="fas fa-seedling text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Landscape Design & Installation</h3>
+                            <p class="text-gray-600">Creating beautiful, sustainable gardens and outdoor spaces tailored to your style. We handle everything from design to planting.</p>
+                        </div>
+                        <!-- Service Card 2 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <i class="fas fa-hard-hat text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Hardscaping & Patios</h3>
+                            <p class="text-gray-600">Enhance your outdoor living area with custom-built patios, walkways, retaining walls, and fire pits that blend function and beauty.</p>
+                        </div>
+                        <!-- Service Card 3 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                             <i class="fas fa-tools text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">General Contractor Services</h3>
+                            <p class="text-gray-600">Beyond the garden, we offer reliable home repairs and exterior work to improve and maintain your entire property.</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Service Card 2 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-hard-hat text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Hardscaping & Patios</h3>
-                    <p class="text-gray-600">Enhance your outdoor living area with custom-built patios, walkways, retaining walls, and fire pits that blend function and beauty.</p>
+            </section>
+            
+            <!-- Why Choose Us Section -->
+            <section id="why-us" class="py-20 bg-gray-100">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Why Choose Us?</h2>
+                        <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
+                        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Our reputation is built on quality, reliability, and customer satisfaction.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Trust Card 1: Reviews -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <i class="fas fa-star text-4xl text-yellow-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Outstanding 5.0 Rating</h3>
+                            <p class="text-gray-600">With 76 reviews and counting, our clients consistently rate us at the top for our exceptional service and results.</p>
+                        </div>
+                        <!-- Trust Card 2: Hours -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <i class="fas fa-clock text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Available When You Need Us</h3>
+                            <p class="text-gray-600">We're open and ready to work from 7:00 AM to 9:00 PM, Monday through Saturday, to fit your busy schedule.</p>
+                        </div>
+                        <!-- Trust Card 3: Experience -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <i class="fas fa-award text-4xl text-blue-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Experienced & Professional</h3>
+                            <p class="text-gray-600">Our dedicated team has the experience and work ethic to handle any project, big or small, with professionalism and care.</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Service Card 3 -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                     <i class="fas fa-tools text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">General Contractor Services</h3>
-                    <p class="text-gray-600">Beyond the garden, we offer reliable home repairs and exterior work to improve and maintain your entire property.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Why Choose Us Section -->
-    <section id="why-us" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Why Choose Us?</h2>
-                <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
-                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Our reputation is built on quality, reliability, and customer satisfaction.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Trust Card 1: Reviews -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-star text-4xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Outstanding 5.0 Rating</h3>
-                    <p class="text-gray-600">With 76 reviews and counting, our clients consistently rate us at the top for our exceptional service and results.</p>
-                </div>
-                <!-- Trust Card 2: Hours -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-clock text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Available When You Need Us</h3>
-                    <p class="text-gray-600">We're open and ready to work from 7:00 AM to 9:00 PM, Monday through Saturday, to fit your busy schedule.</p>
-                </div>
-                <!-- Trust Card 3: Experience -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-award text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Experienced & Professional</h3>
-                    <p class="text-gray-600">Our dedicated team has the experience and work ethic to handle any project, big or small, with professionalism and care.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Project Gallery</h2>
-                <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
-                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">See the quality of our work and get inspired.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMklmVXn5ghcj0xeQzPbuz8Sdoat9vNnf4SbZu3=s773-k-no" alt="Barrington Landscaping project photo 1" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipNHmDEvFoHP86X0XKDK-XWiO0K0ts_NKAQ9GVcy=s901-k-no" alt="Barrington Landscaping project photo 2" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipN78dGaC-B1kUTItI0XP1lP3jUjPWIwgDlYOCXd=s901-k-no" alt="Barrington Landscaping project photo 3" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipOXf12iPRVIUvVhkK676PiWfl5hZFSurHxqB6CU=s901-k-no" alt="Barrington Landscaping project photo 4" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipP-P7QKL3LDULv_GeXfvUQbcT_0ZodIo5K1IVj1=s773-k-no" alt="Barrington Landscaping project photo 5" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMX9TvN5Q20MvvxUOzvDif-tOsbV1aGlwxUpD6W=s773-k-no" alt="Barrington Landscaping project photo 6" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipPxCyXHueCi5LS6YzfseSivwLFMIzP3jcnUiIA8=s812-k-no" alt="Barrington Landscaping project photo 7" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-                <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrw5lahdj2_SGPEkn51bDdwKrMZIjT19U8sZVUwmPlanvMcjV_b_rMu4HmXfnEA5Us75p6OfkOlCc_dp479IGPB0nxGi5Q4ycNomCb7A7IwXLAp9wqcrHzQh7Fnt2mW2xIgSJaJ=s901-k-no" alt="Barrington Landscaping project photo 8" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
-            </div>
-        </div>
-    </section>
+            <!-- Gallery Section -->
+            <section id="gallery" class="py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Project Gallery</h2>
+                        <div class="mt-4 w-24 h-1.5 bg-green-700 mx-auto rounded-full"></div>
+                        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">See the quality of our work and get inspired.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipMklmVXn5ghcj0xeQzPbuz8Sdoat9vNnf4SbZu3=s773-k-no" alt="Barrington Landscaping project photo 1" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipNHmDEvFoHP86X0XKDK-XWiO0K0ts_NKAQ9GVcy=s901-k-no" alt="Barrington Landscaping project photo 2" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipN78dGaC-B1kUTItI0XP1lP3jUjPWIwgDlYOCXd=s901-k-no" alt="Barrington Landscaping project photo 3" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipOXf12iPRVIUvVhkK676PiWfl5hZFSurHxqB6CU=s901-k-no" alt="Barrington Landscaping project photo 4" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipP-P7QKL3LDULv_GeXfvUQbcT_0ZodIo5K1IVj1=s773-k-no" alt="Barrington Landscaping project photo 5" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipMX9TvN5Q20MvvxUOzvDif-tOsbV1aGlwxUpD6W=s773-k-no" alt="Barrington Landscaping project photo 6" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipPxCyXHueCi5LS6YzfseSivwLFMIzP3jcnUiIA8=s812-k-no" alt="Barrington Landscaping project photo 7" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrw5lahdj2_SGPEkn51bDdwKrMZIjT19U8sZVUwmPlanvMcjV_b_rMu4HmXfnEA5Us75p6OfkOlCc_dp479IGPB0nxGi5Q4ycNomCb7A7IwXLAp9wqcrHzQh7Fnt2mW2xIgSJaJ=s901-k-no" alt="Barrington Landscaping project photo 8" class="rounded-lg shadow-md hover:opacity-90 transition cursor-pointer w-full h-full object-cover">
+                    </div>
+                </div>
+            </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-green-800 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-2">Ready to Start Your Project?</h2>
-            <p class="text-lg text-green-200 mb-8 max-w-2xl mx-auto">The fastest way to get a quote and discuss your needs is to give us a call. We're ready to help!</p>
-            <div class="mt-10">
-                <a href="tel:+14014993401" class="bg-white text-green-800 font-bold text-2xl px-10 py-5 rounded-full hover:bg-gray-200 transition-transform transform hover:scale-105 inline-block shadow-lg">
-                    <i class="fas fa-phone mr-3"></i>Click to Call Now
-                </a>
-                <p class="mt-6 font-bold">Phone: +1 (401) 499-3401</p>
-                <a href="https://maps.app.goo.gl/CsmPNwF5EDsDBPU19" target="_blank" class="mt-2 inline-block text-green-200 hover:underline">View on Google Maps</a>
-            </div>
-        </div>
-    </section>
+            <!-- Contact Section -->
+            <section id="contact" class="py-20 bg-green-800 text-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl font-bold mb-2">Ready to Start Your Project?</h2>
+                    <p class="text-lg text-green-200 mb-8 max-w-2xl mx-auto">The fastest way to get a quote and discuss your needs is to give us a call. We're ready to help!</p>
+                    <div class="mt-10">
+                        <a href="tel:+14014993401" class="bg-white text-green-800 font-bold text-2xl px-10 py-5 rounded-full hover:bg-gray-200 transition-transform transform hover:scale-105 inline-block shadow-lg">
+                            <i class="fas fa-phone mr-3"></i>Click to Call Now
+                        </a>
+                        <p class="mt-6 font-bold">Phone: +1 (401) 499-3401</p>
+                        <a href="https://maps.app.goo.gl/CsmPNwF5EDsDBPU19" target="_blank" class="mt-2 inline-block text-green-200 hover:underline">View on Google Maps</a>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Barrington Landscaping & Contractor Services. All Rights Reserved.</p>
+            <!-- Footer -->
+            <footer class="bg-gray-800 text-white py-8">
+                <div class="container mx-auto px-6 text-center">
+                    <p>&copy; 2025 Barrington Landscaping & Contractor Services. All Rights Reserved.</p>
+                </div>
+            </footer>
         </div>
-    </footer>
+    </div>
 
     <script>
         // This script handles the mobile menu logic.
